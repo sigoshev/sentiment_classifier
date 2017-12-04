@@ -2,6 +2,7 @@ from sentiment_classifier import SentimentClassifier
 from codecs import open
 import time
 from flask import Flask, render_template, request
+from flask import redirect, url_for
 
 app = Flask(__name__)
 
@@ -10,6 +11,11 @@ start_time = time.time()
 classifier = SentimentClassifier()
 print('Classifier is ready')
 print(time.time() - start_time, 'seconds')
+
+
+@app.route("/")
+def index():
+    return redirect(url_for("index_page"))
 
 
 @app.route("/sentiment-demo", methods=["POST", "GET"])
