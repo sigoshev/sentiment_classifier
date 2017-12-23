@@ -8,9 +8,10 @@ name = "pypi"
 [packages]
 
 scikit-learn = "*"
-flask = "*"
+Flask = "*"
 gunicorn = "*"
 "eli5" = "*"
+Flask-Bootstrap = "*"
 
 
 [dev-packages]

@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Анализ отзывов на мобильные телефоны{% endblock %}
+
+{% block content %}
+    <div class="container col-xs-4">
+        <form class="form" action="{{ url_for('sentiment') }}" method="post" role="form">
+            <div class="form-group">
+                <h4><label for="review">Отзыв:</label></h4>
+                <textarea name="text" rows="10" id="review" class="form-control input-lg" placeholder="Введите/вставьте отзыв на мобильный телефон">{{ text }}</textarea>
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">Оценить</button>
+            </div>
+        </form>
+    </div>
+
+    {% if prediction_message %}
+        <div class="col-xs-8">
+            <h4>Анализ тональности отзыва:</h4>
+            <p>
+                {{ prediction_message }}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}
