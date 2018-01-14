@@ -5,13 +5,14 @@ from eli5.formatters.html import format_as_html
 
 class SentimentClassifier:
     def __init__(self):
-        self.pipeline = joblib.load('./TfIdfVect_LogRegCV_model.pkl')
+        self.pipeline = joblib.load('./models/TfIdfVect_stopwords_LogRegCV_model.pkl')
         self.classes_dict = {0: 'negative', 1: 'positive', -1: 'prediction_error'}
 
     def predict_text(self, text):
         try:
             return self.pipeline.predict([text])[0], \
-                   eli5.explain_prediction(self.pipeline.steps[1][1], text, vec=self.pipeline.steps[0][1], top=10,
+                   eli5.explain_prediction(self.pipeline.steps[1][1], text,
+                                           vec=self.pipeline.steps[0][1], top=10,
                                            target_names=['negative', 'positive'])
         except:
             print('prediction error')

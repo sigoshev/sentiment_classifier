@@ -1,5 +1,4 @@
 from sentiment_classifier import SentimentClassifier
-from codecs import open
 import time
 from flask import Flask, render_template, request
 from flask import redirect, url_for
@@ -24,18 +23,13 @@ def index():
 def sentiment(text="", prediction_message="", eli5_prediction=""):
     if request.method == "POST":
         text = request.form["text"]
-        logfile = open("ydf_demo_logs.txt", "a", "utf-8")
         print(text)
-        print('<response>', file=logfile)
-        print(text, file=logfile)
         prediction_message, eli5_prediction = classifier.get_prediction_message(text)
         print(prediction_message)
-        print(prediction_message, file=logfile)
-        print('</response>', file=logfile)
-        logfile.close()
 
     eli5_prediction = '<div class="col-xs-8">' + eli5_prediction + "</div>"
-    return render_template('bootstrap.html', text=text, prediction_message=prediction_message) + '\n' + eli5_prediction
+    return render_template('bootstrap.html', text=text,
+                           prediction_message=prediction_message) + '\n' + eli5_prediction
 
 
 if __name__ == "__main__":
